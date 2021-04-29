@@ -1,10 +1,13 @@
-# Project Name
+# common-konfig
 
 <!-- PROJECT SHIELDS -->
-<!--
-*** Add Project Shields here. Several of Elhubs systems provide shields, so why not use them to give info at a glance.
-*** [TeamCity Builds][SonarQube Quality Gate][SonarQube Vulnerabilities][SonarQube bugs][SonarQube smells][SonarQube Coverage]
--->
+![TeamCity Build](https://teamcity.elhub.cloud/app/rest/builds/buildType:(id:Common_CommonKonfigAutoRelease_AutoRelease)/statusIcon)
+[![Quality Gate Status](https://sonar.elhub.cloud/api/project_badges/measure?project=no.elhub.common%3Acommon-konfig&metric=alert_status)](https://sonar.elhub.cloud/dashboard?id=no.elhub.common%3Acommon-konfig)
+[![Lines of Code](https://sonar.elhub.cloud/api/project_badges/measure?project=no.elhub.common%3Acommon-konfig&metric=ncloc)](https://sonar.elhub.cloud/dashboard?id=no.elhub.common%3Acommon-konfig)
+
+[![Vulnerabilities](https://sonar.elhub.cloud/api/project_badges/measure?project=no.elhub.common%3Acommon-konfig&metric=vulnerabilities)](https://sonar.elhub.cloud/dashboard?id=no.elhub.common%3Acommon-konfig)
+[![Bugs](https://sonar.elhub.cloud/api/project_badges/measure?project=no.elhub.common%3Acommon-konfig&metric=bugs)](https://sonar.elhub.cloud/dashboard?id=no.elhub.common%3Acommon-konfig)
+[![Code Smells](https://sonar.elhub.cloud/api/project_badges/measure?project=no.elhub.common%3Acommon-konfig&metric=code_smells)](https://sonar.elhub.cloud/dashboard?id=no.elhub.common%3Acommon-konfig)
 
 ## Table of Contents
 
@@ -22,58 +25,76 @@
 
 ## About
 
-One to two paragraph statement about the project and what it does.
-
+**common-konfig** is a simple, extensible type-safe API for adding configuration properties from multiple sources
+to a Kotlin/Java project.
 
 ## Getting Started
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-```sh
-npm install npm@latest -g
-```
+A Kotlin or Java project.
 
 ### Installation
 
-1. Clone the repo
-```sh
-git clone https://github.com/github_username/repo_name.git
+Add the dependency to your project. For Gradle:
+
+```kotlin
+    implementation("no.elhub.common:common-konfig:${konfig-version})
 ```
-2. Install NPM packages
-```sh
-npm install
+
+Or maven:
+```xml
+        <dependency>
+            <groupId>no.elhub.common</groupId>
+            <artifactId>common-konfig</artifactId>
+            <version>${konfig_version}</version>
+        </dependency>
 ```
 
 ## Usage
 
-Use this space to show useful examples of how the project can be used. Screenshots, code examples and demos work well in this space. You may also link to
-more resources.
+You can use common-konfig in a variety of ways, but the simplest way (in Kotlin) is simply to create an object that
+extends Configurable. For example:
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+```kotlin
+import no.elhub.common.konfig.Configurable
+import no.elhub.common.konfig.sources.ResourceFile
+
+object MyConfiguration : Configurable(arrayOf(ResourceFile("my.properties"))) {
+  val aProperty = property<String>("aProperty")
+  val anotherProperty = property<Int>("another.property.with.weird.name")
+  val thirdProperty = property<String>("databasename")
+}
+```
+
+The configurable takes a number of PropertySource objects, with the precedence of the objects in the array reflecting
+the precedence the Configurable will give the properties in the code. Currently the project has only a few
+sources that it can handle, but it is easy to add new ones by implementing them for the `PropertySource` interface.
 
 ## Testing
 
-Explain how to run the automated tests for this system if appropriate.
-
-```
-Give an example
+To test the module, run:
+```bash
+./gradlew test
 ```
 
 ## Roadmap
 
-See the [open issues](https://jira.elhub.cloud/link-to-issues) for a list of proposed features (and known issues).
+See the
+[open issues](https://jira.elhub.cloud/issues/?jql=project%20%3D%20TD%20AND%20component%20%3D%20common-konfig%20AND%20resolution%20%3D%20Unresolved)
+for a list of proposed features (and known issues).
+
+This project still needs additional development to add support for more types, property sources, etc.
 
 ## Contributing
 
 Contributing, issues and feature requests are welcome. See the
-[Contributing](https://link-to/CONTRIBUTING.md) file.
+[Contributing](https://github.com/elhub/common-konfig/blob/main/CONTRIBUTING.md) file.
 
 ## Owners
 
-This project is developed by [Elhub](https://wwww.elhub.no). For the specific development group responsible for this
-code, see the [Codeowners](https://link-to/CODEOWNERS) file.
+This project is developed by [Elhub](https://github.com/elhub). For the specific development group responsible for this
+code, see the [Codeowners](https://github.com/elhub/common-konfig/blob/main/CODEOWNERS) file.
 
 ## License
 
