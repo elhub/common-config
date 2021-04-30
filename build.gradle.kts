@@ -124,3 +124,12 @@ artifactory {
 tasks["artifactoryPublish"].dependsOn(tasks["assemble"])
 
 tasks["publish"].dependsOn(tasks["artifactoryPublish"])
+
+/*
+ * TeamCity
+ */
+tasks.register("teamCity", Exec::class) {
+    description = "Compile the TeamCity settings"
+    workingDir(".teamcity")
+    commandLine("mvn","compile")
+}
