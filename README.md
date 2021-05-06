@@ -1,7 +1,7 @@
 # common-konfig
 
 <!-- PROJECT SHIELDS -->
-![TeamCity Build](https://teamcity.elhub.cloud/app/rest/builds/buildType:(id:Common_CommonKonfigAutoRelease_AutoRelease)/statusIcon)
+![TeamCity Build](https://teamcity.elhub.cloud/app/rest/builds/buildType:(id:Common_CommonKonfig_AutoRelease)/statusIcon)
 [![Quality Gate Status](https://sonar.elhub.cloud/api/project_badges/measure?project=no.elhub.common%3Acommon-konfig&metric=alert_status)](https://sonar.elhub.cloud/dashboard?id=no.elhub.common%3Acommon-konfig)
 [![Lines of Code](https://sonar.elhub.cloud/api/project_badges/measure?project=no.elhub.common%3Acommon-konfig&metric=ncloc)](https://sonar.elhub.cloud/dashboard?id=no.elhub.common%3Acommon-konfig)
 
