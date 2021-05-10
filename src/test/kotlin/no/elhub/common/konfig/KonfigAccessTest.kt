@@ -24,7 +24,6 @@ class KonfigAccessTest : DescribeSpec({
             ResourceTestConfig.contains("notAPresentString") shouldBe false
         }
 
-
     }
 
 })

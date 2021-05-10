@@ -4,6 +4,7 @@
 package no.elhub.common.konfig
 
 import no.elhub.common.konfig.sources.PropertySource
+import java.time.Duration
 import java.util.Properties
 
 abstract class Configurable(private val sources: Array<PropertySource>) {
@@ -32,6 +33,9 @@ abstract class Configurable(private val sources: Array<PropertySource>) {
     operator fun contains(key: String) = properties.containsKey(key)
 
     inline fun <reified T> property(key: String): T = when (T::class) {
+        Boolean::class ->  properties.getProperty(key).toBoolean() as T? ?: throw KonfigException("Missing property value $key")
+        Duration::class ->  Duration.parse(properties.getProperty(key)) as T? ?: throw KonfigException("Missing property value $key")
+        Int::class ->  properties.getProperty(key).toInt() as T? ?: throw KonfigException("Missing property value $key")
         String::class -> properties.getProperty(key) as T? ?: throw KonfigException("Missing property value $key")
         else -> throw KonfigException("Wrong type")
     }
